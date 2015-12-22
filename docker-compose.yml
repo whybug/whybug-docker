@@ -1,8 +1,8 @@
 web:
-  image: quay.io/whybug/whybug-server
-  env_file: ../.env
+  image: quay.io/whybug/whybug-server:latest
+  env_file: ../whybug-server/.env
   ports:
-  - 8000:8000/tcp
+  - 8001:8000/tcp
   labels:
     io.rancher.service.hash: 04742c5f1c5c4b0bc5334812266231b25123ae3f
     io.rancher.container.pull_image: always
@@ -19,8 +19,8 @@ elasticsearch:
     io.rancher.service.hash: 21cf9e34f76f73539f874cebf314089c3fd8b00f
   tty: true
   hostname: search
-  volumes:
-  - $PWD/elasticsearch:/usr/share/elasticsearch/config
+  #volumes:
+  #- $PWD/elasticsearch:/usr/share/elasticsearch/config
   stdin_open: true
 
 postgres:
@@ -34,4 +34,15 @@ postgres:
     POSTGRES_PASSWORD: dOn5af1nAk1wit8aW6yet3pAg3
   tty: true
   hostname: db
+  stdin_open: true
+
+loadbalancer:
+  ports:
+  - 443:8000
+  labels:
+    io.rancher.loadbalancer.ssl.ports: '443'
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - web:web
   stdin_open: true

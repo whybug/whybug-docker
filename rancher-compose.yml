@@ -2,6 +2,7 @@ web:
   scale: 1
   metadata:
     io.rancher.service.hash: ef6f20e9c2931390034d1561104d5547416b525f
+    io.rancher.container.pull_image: always
   health_check:
     port: 8000
     interval: 2000
@@ -9,10 +10,27 @@ web:
     request_line: GET /healthcheck HTTP/1.0
     healthy_threshold: 2
     response_timeout: 2000
+
+loadbalancer:
+  scale: 1
+  load_balancer_config:
+    haproxy_config:
+      global: |-
+        # lower record size to improve time to first byte
+        tune.ssl.maxrecord 1370
+  default_cert: whybug.com 12/2015
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
 elasticsearch:
   scale: 1
   metadata:
     io.rancher.service.hash: b2b198f43adbc6eda8701234a7f2071a5d886a8b
+
 postgres:
   scale: 1
   metadata:
