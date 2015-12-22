@@ -18,7 +18,7 @@ loadbalancer:
       global: |-
         # lower record size to improve time to first byte
         tune.ssl.maxrecord 1370
-  default_cert: whybug.com 12/2015
+  default_cert: whybug.com until March 2016
   health_check:
     port: 42
     interval: 2000
