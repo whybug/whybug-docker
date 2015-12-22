@@ -6,9 +6,10 @@ web:
   labels:
     io.rancher.service.hash: 04742c5f1c5c4b0bc5334812266231b25123ae3f
     io.rancher.container.pull_image: always
-  links:
-  - postgres:db
-  - elasticsearch:search
+    io.rancher.sidekicks: elasticsearch,postgres,loadbalancer
+#  links:
+#  - postgres:db
+#  - elasticsearch:search
   tty: true
   hostname: web
   stdin_open: true

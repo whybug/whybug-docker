@@ -1,5 +1,5 @@
 web:
-  scale: 1
+  scale: 2
   metadata:
     io.rancher.service.hash: ef6f20e9c2931390034d1561104d5547416b525f
     io.rancher.container.pull_image: always
@@ -12,7 +12,7 @@ web:
     response_timeout: 2000
 
 loadbalancer:
-  scale: 1
+#  scale: 1
   load_balancer_config:
     haproxy_config:
       global: |-
@@ -27,11 +27,11 @@ loadbalancer:
     response_timeout: 2000
 
 elasticsearch:
-  scale: 1
+#  scale: 1
   metadata:
     io.rancher.service.hash: b2b198f43adbc6eda8701234a7f2071a5d886a8b
 
 postgres:
-  scale: 1
+#  scale: 1
   metadata:
     io.rancher.service.hash: 9c95e1a420c4a1c70b8aa425cdf2da08b1aefa78
